@@ -18,9 +18,9 @@ const expressApp = express()
 
 const httpServer = createServer()
 
-if(process.env.NODE_ENV !== "PRODUCTION"){
+// if(process.env.NODE_ENV !== "PRODUCTION"){
     dotenv.config({path:"server/.env"})
-}
+// }
 
 const io = new Server(httpServer, {
     cors: {
@@ -214,6 +214,6 @@ io.on("connection", async (socket) => { /// step 2
     });
 })
 
-httpServer.listen( 4999, () => {
+httpServer.listen( process.env.PORT || 4999, () => {
     console.log(`connected successfully on http://localhost:4999`)
 })
