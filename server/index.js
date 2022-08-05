@@ -70,12 +70,12 @@ io.use((socket, next) => { /// step 1
     next(); // is middleware ke baad sicket connection call hoga
 })
 
-if(process.env.NODE_ENV){
+// if(process.env.NODE_ENV){
     expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
     expressApp.get("/",(req,res)=>{
         res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
     })
-}
+// }
 
 // 7900 - 5050 = 2850 + 3900
 
