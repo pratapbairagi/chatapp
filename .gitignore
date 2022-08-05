@@ -13,7 +13,7 @@
 /chatapp/build
 
 # misc
-/backend/config/.env
+/server/.env
 /chatapp/.DS_Store
 /chatapp/.env.local
 /chatapp/.env.development.local
