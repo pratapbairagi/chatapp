@@ -72,10 +72,12 @@ io.use((socket, next) => { /// step 1
 
 if(process.env.NODE_ENV){
     expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
-    expressApp.get("*",(req,res)=>{
+    expressApp.get("/",(req,res)=>{
         res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
     })
 }
+
+// 7900 - 5050 = 2850 + 3900
 
 function getMessagesForUser(userId){
 
