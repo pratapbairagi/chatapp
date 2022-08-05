@@ -25,7 +25,7 @@ if(process.env.NODE_ENV !== "PRODUCTION"){
 const io = new Server(httpServer, {
     cors: {
         // origin: "http://localhost:3000", // frontend url
-        origin: "http://wechat-free.herokuapp.com", // frontend url
+        origin: "https://wechat-free.herokuapp.com", // frontend url
 
         methods: ["GET", "POST"]
     }
