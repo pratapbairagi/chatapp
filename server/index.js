@@ -22,6 +22,9 @@ const httpServer = createServer()
     dotenv.config({path:"server/.env"})
 // }
 
+const port = process.env.PORT
+
+
 const io = new Server(httpServer, {
     cors: {
         // origin: "http://localhost:3000", // frontend url
@@ -70,12 +73,16 @@ io.use((socket, next) => { /// step 1
     next(); // is middleware ke baad sicket connection call hoga
 })
 
+
+expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
+expressApp.get("/", (req, res)=>{
 // if(process.env.NODE_ENV){
-    expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
-    expressApp.get("/",(req,res)=>{
+    // expressApp.get("/",(req,res)=>{
         res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
-    })
+        res.end()
+    // })
 // }
+})
 
 // 7900 - 5050 = 2850 + 3900
 
@@ -216,6 +223,6 @@ io.on("connection", async (socket) => { /// step 2
     });
 })
 
-httpServer.listen( process.env.PORT || 4999, () => {
+httpServer.listen(port, () => {
     console.log(`connected successfully on http://localhost:4999`)
 })
