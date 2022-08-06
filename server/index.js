@@ -9,6 +9,7 @@ import { findMessagesForUser, saveMessage } from "./messageStorage.js"
 import path from "path"
 import express from "express"
 import { fileURLToPath } from "url"
+import cors from "cors"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -23,12 +24,13 @@ const httpServer = createServer(expressApp)
 // }
 
 const port = process.env.PORT
-
+expressApp.use(cors())
 
 const io = new Server(httpServer, {
     cors: {
         // origin: "http://localhost:3000", // frontend url
         origin: "https://wechat-free.herokuapp.com", // frontend url
+        // https://wechat-free.herokuapp.com/
 
         methods: ["GET", "POST"]
     }

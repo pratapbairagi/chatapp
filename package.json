@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engines": {
     "node": "17.8.0",
-    "npm":"8.16.0"
+    "npm": "8.16.0"
   },
   "main": "server/index.js",
   "type": "module",
@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "nodemon": "^2.0.19",
