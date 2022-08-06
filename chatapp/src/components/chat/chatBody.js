@@ -28,7 +28,7 @@ const ChatBody = ({users,user, messages, selectedUser, typing}) => {
 
                         <div className="mssgSender" style={{fontSize:"70%", colort:"white", width:"100%",padding:".3rem .5rem", fontWeight:"500", textAlign:`${m.userId === user.userId ? "right" :"left"}`, color:"white"}}>{m.userId === user.userId ? "You" : selectedUser.username}</div>
                         <div className="mssgText" style={{width:"95%", margin:"0 auto",background:"white", color:"black", padding:".5rem .3rem", borderRadius:"4px", textAlign:"left", fontSize:"70%"}}>{m.message}</div>
-                        <div className="mssgTime" style={{fontSize:"50%", color:"white", colort:"white", width:"100%",padding:".2rem .4rem", textAlign:"right"}}>{new Date(m.time).toLocaleString()}</div>
+                        <div className="mssgTime" style={{fontSize:"50%", color:"white", colort:"white", width:"100%",padding:".2rem .4rem", textAlign:"right"}}>{m.time !== undefined ? new Date(m.time).toLocaleString() :  new Date(Date.now()).toLocaleString()}</div>
 
                     </div>
                 </div>

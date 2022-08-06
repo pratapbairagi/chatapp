@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename)
 const expressApp = express()
 
 
-const httpServer = createServer()
+const httpServer = createServer(expressApp)
 
 // if(process.env.NODE_ENV !== "PRODUCTION"){
     dotenv.config({path:"server/.env"})
@@ -32,6 +32,17 @@ const io = new Server(httpServer, {
 
         methods: ["GET", "POST"]
     }
+})
+
+
+expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
+expressApp.get("/", (req, res)=>{
+// if(process.env.NODE_ENV){
+    // expressApp.get("/",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
+        res.end()
+    // })
+// }
 })
 
 // middleware
@@ -73,16 +84,6 @@ io.use((socket, next) => { /// step 1
     next(); // is middleware ke baad sicket connection call hoga
 })
 
-
-expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
-expressApp.get("/", (req, res)=>{
-// if(process.env.NODE_ENV){
-    // expressApp.get("/",(req,res)=>{
-        res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
-        res.end()
-    // })
-// }
-})
 
 // 7900 - 5050 = 2850 + 3900
 
