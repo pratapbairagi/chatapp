@@ -40,7 +40,6 @@ expressApp.get("/", (req, res)=>{
 // if(process.env.NODE_ENV){
     // expressApp.get("/",(req,res)=>{
         res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
-        res.end()
     // })
 // }
 })
