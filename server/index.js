@@ -33,6 +33,7 @@ const io = new Server(httpServer, {
         // https://wechat-free.herokuapp.com/
 
         methods: ["GET", "POST"]
+        
     }
 })
 
