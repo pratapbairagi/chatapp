@@ -1,7 +1,7 @@
 // const Server = require("socket.io")
-// const createServer = require("http")
+import http from "http"
 import { Server } from "socket.io"
-import { createServer } from "http"
+// import { createServer } from "http"
 import { v4 as uuidV4 } from "uuid"
 import dotenv from "dotenv"
 import { findAllSessions, findSession, saveSession } from "./sessionStorage.js"
@@ -19,13 +19,13 @@ const __dirname = path.dirname(__filename)
 const expressApp = express()
 
 
-const httpServer = createServer(expressApp)
+const httpServer = http.createServer(expressApp)
 
 // if(process.env.NODE_ENV !== "PRODUCTION"){
     dotenv.config({path:"server/.env"})
 // }
 
-const port = process.env.PORT
+const port = process.env.PORT || 4999
 expressApp.use(cors())
 
 const io = new Server(httpServer, {
@@ -38,6 +38,8 @@ const io = new Server(httpServer, {
         
     }
 })
+
+// const io = new Server(httpServer)
 
 
 expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))

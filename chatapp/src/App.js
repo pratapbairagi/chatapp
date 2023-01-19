@@ -7,11 +7,13 @@ import "./App.css"
 
 // const socket = io("http://localhost:4999")
 // const ENDPOINT = "https://wechat-free.herokuapp.com"
-const ENDPOINT = "https://chatapp-server-pratap.vercel.app";
-// const ENDPOINT = "http://localhost:4999"
+// const ENDPOINT = "chatapp-server-pratap.vercel.app";
+const ENDPOINT = "localhost:4999"
 
-const socket= io(ENDPOINT, {transports:['websocket','polling'], forceNew:true})
+// const socket= io(ENDPOINT, {transports:['websocket','polling'], forceNew:true})
 // const socket= io("ws://localhost:4999")
+const socket= io(`ws://${ENDPOINT}`, {transports:['websocket','polling'], forceNew:true})
+
 // var socket = io.connect("http:// 127.0.0.1:4999", {
 //    forceNew: true,
 //    transports: ['websocket'],
