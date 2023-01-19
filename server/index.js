@@ -10,6 +10,8 @@ import path from "path"
 import express from "express"
 import { fileURLToPath } from "url"
 import cors from "cors"
+import { mongoConn } from "./config/mongoDbConnection.js"
+import { User } from "./models/userSchema.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -28,8 +30,8 @@ expressApp.use(cors())
 
 const io = new Server(httpServer, {
     cors: {
-        // origin: "http://localhost:3000", // frontend url
-        origin: "https://wechat-free.herokuapp.com", // frontend url
+        origin: "http://localhost:4999", // frontend url
+        // origin: "https://wechat-free.herokuapp.com", // frontend url
         // https://wechat-free.herokuapp.com/
 
         methods: ["GET", "POST"]
@@ -38,18 +40,23 @@ const io = new Server(httpServer, {
 })
 
 
-expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
-expressApp.get("/", (req, res)=>{
+// expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
+// expressApp.get("/", (req, res)=>{
 // if(process.env.NODE_ENV){
     // expressApp.get("/",(req,res)=>{
-        res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
+        // res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
     // })
 // }
-})
+// })
 
 // middleware
 
-io.use((socket, next) => { /// step 1
+// 3,24,000
+// 40
+// 8,100
+// 
+
+io.use(async(socket, next) => { /// step 1
 //     // initially this middleware will call after requesting connection from frontend
 //     // connection request will carry username with socket from frontend
     const sessionId = socket.handshake.auth.sessionId // from frontend, if session found in localStorage, then this connection will call with session id
@@ -83,9 +90,9 @@ io.use((socket, next) => { /// step 1
     socket.userId = uuidV4()
     socket.sessionId = uuidV4() // set session id
 
+    
     next(); // is middleware ke baad sicket connection call hoga
 })
-
 
 // 7900 - 5050 = 2850 + 3900
 
@@ -99,9 +106,36 @@ function getMessagesForUser(userId){
     return messages
 }
 
+
 io.on("connection", async (socket) => { /// step 2
 
     // if socket rec any username then it will work
+
+//     console.log("user 1")
+
+//     const isUsername = await User.findOne({name:socket.handshake.auth.username})
+
+//     console.log("user 2")
+
+//     if(isUsername){
+//         return next(new Error("user name already exist !"))
+//     }
+
+//     console.log("user 3")
+
+//     if(!isUsername){
+//      await User.create({
+//         name:socket.handshake.auth.username,
+//         email:"pratap@gmail6.com",
+//         phone:8287889121,
+//         gender:"male",
+//         age:27,
+//         password:"123456789"
+//     })
+// }
+
+//     console.log("user 2")
+
 
     // save session when connection rec
     saveSession(socket.sessionId, { // step 2.1
@@ -225,6 +259,10 @@ io.on("connection", async (socket) => { /// step 2
         }
     });
 })
+
+// mongoConn(process.env.MONGO_CONN)
+mongoConn("mongodb+srv://pro:18May1994@cluster0.5qgqh.mongodb.net/wechat-free?retryWrites=true&w=majority")
+
 
 httpServer.listen(port, () => {
     console.log(`connected successfully on http://localhost:4999`)
