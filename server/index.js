@@ -261,7 +261,16 @@ io.on("connection", async (socket) => { /// step 2
 })
 
 // mongoConn(process.env.MONGO_CONN)
-mongoConn("mongodb+srv://pro:18May1994@cluster0.5qgqh.mongodb.net/wechat-free?retryWrites=true&w=majority")
+// mongoConn("mongodb+srv://pro:18May1994@cluster0.5qgqh.mongodb.net/wechat-free?retryWrites=true&w=majority")
+mongoConn("mongodb+srv://pro:pro@cluster0.5qgqh.mongodb.net/chat?retryWrites=true&w=majority")
+// mongoConn("mongodb://crud:crud@cluster0-shard-00-00.5qgqh.mongodb.net:27017,cluster0-shard-00-01.5qgqh.mongodb.net:27017,cluster0-shard-00-02.5qgqh.mongodb.net:27017/chat?ssl=true&replicaSet=atlas-5875s3-shard-0&authSource=admin&retryWrites=true&w=majority")
+
+
+
+
+
+
+
 
 
 httpServer.listen(port, () => {

@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 export const mongoConn = async (url) => {
+    
     try {
 
         mongoose.connect(url).then((res)=>{
