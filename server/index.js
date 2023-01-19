@@ -40,14 +40,14 @@ const io = new Server(httpServer, {
 })
 
 
-// expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
-// expressApp.get("/", (req, res)=>{
-// if(process.env.NODE_ENV){
-    // expressApp.get("/",(req,res)=>{
-        // res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
-    // })
-// }
-// })
+expressApp.use(express.static(path.join(__dirname,"../chatapp/build")))
+expressApp.get("/", (req, res)=>{
+if(process.env.NODE_ENV){
+    expressApp.get("/",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,"../chatapp/build/index.html"))
+    })
+}
+})
 
 // middleware
 
