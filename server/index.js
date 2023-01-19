@@ -30,8 +30,8 @@ expressApp.use(cors())
 
 const io = new Server(httpServer, {
     cors: {
-        origin: "http://localhost:4999", // frontend url
-        // origin: "https://wechat-free.herokuapp.com", // frontend url
+        // origin: "http://localhost:4999", // frontend url
+        origin: "https://chatapp-server-pratap.vercel.app", // frontend url
         // https://wechat-free.herokuapp.com/
 
         methods: ["GET", "POST"]
